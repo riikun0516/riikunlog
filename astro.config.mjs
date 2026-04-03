@@ -1,9 +1,7 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
-import { d1, r2 /* sandbox */ } from "@emdash-cms/cloudflare";
+import { d1, r2 } from "@emdash-cms/cloudflare";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
-// 有料プラン機能のためコメントアウト
-// import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier"; 
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 
@@ -19,17 +17,15 @@ export default defineConfig({
 		emdash({
 			database: d1({ 
 				binding: "DB", 
-				// "auto"だと名前衝突エラーが起きるため、作成済みのIDを指定します
-				// Cloudflareダッシュボードの[KV]から取得したIDをここに貼り付けてください
-				session: "2f7eb050080c4d229f94bf97d80aa6cb" 
+				session: "auto" // 既存のKVを消していれば、これで新しく作られます
 			}),
 			storage: r2({ binding: "MEDIA" }),
 			plugins: [formsPlugin()],
 			
-			/* 以下の「Dynamic Workers」を必要とする項目はコメントアウトして無効化します */
-			// sandboxed: [webhookNotifierPlugin()],
-			// sandboxRunner: sandbox(),
-			// marketplace: "https://marketplace.emdashcms.com",
+			// 有料プラン機能（Dynamic Workers）を完全に無効化
+			// sandboxed: [],
+			// sandboxRunner: null,
+			// marketplace: null,
 		}),
 	],
 	devToolbar: { enabled: false },
