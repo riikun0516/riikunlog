@@ -18,12 +18,11 @@ export default defineConfig({
 		emdash({
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
-			plugins: [formsPlugin()], // これは通常のプラグインなのでOK
-			/* 以下の sandbox 関連が有料プラン機能を必要とするためコメントアウト
-			   sandboxed: [webhookNotifierPlugin()],
-			   sandboxRunner: sandbox(),
-			*/
-			marketplace: "https://marketplace.emdashcms.com",
+			plugins: [formsPlugin()], 
+			/* 以下の 3つすべてをコメントアウトします */
+			// sandboxed: [webhookNotifierPlugin()],
+			// sandboxRunner: sandbox(),
+			// marketplace: "https://marketplace.emdashcms.com", 
 		}),
 	],
 	devToolbar: { enabled: false },
